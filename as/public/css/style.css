@@ -1,0 +1,6 @@
+#catalog .list-group-item{
+    transition: all 0.3s ease-in-out;
+}
+#catalog .list-group-item:hover{
+background-color: #198754 ;
+}
