@@ -22,6 +22,7 @@ function formAction(form,action){
 
     $.post({
         url: $(form).attr('action'),
+        data: $(form).serialize(),
         success: (res)=>{
             console.log(res)
         }, error:(res)=>{
