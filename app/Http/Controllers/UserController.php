@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -25,17 +26,49 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-            User::create([
-                'name' => $r->name,
-                'surname' => $r->surname,
-                'patronymic' => $r->patronymic,
-                'login' => $r->login,
-                'email' => $r->email,
-                'password' => Hash::make($r->password),
-            ]);
-            return response()->json(['success' => 'success', 200]);
-        
+        User::create([
+            'name' => $r->name,
+            'surname' => $r->surname,
+            'patronymic' => $r->patronymic,
+            'login' => $r->login,
+            'email' => $r->email,
+            'password' => Hash::make($r->password),
+        ]);
+        return response()->json(['success' => 'success', 200]);
+    }
+    public function login(Request $r)
+    {
 
+        $validator = Validator::make($r->all(), [
+            'login' => 'required|string',
+            'password1' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+        if (Auth::attempt([
+            'login' => $r->login,
+            'password' => $r->password1
+        ])) {
+            if (Auth::user()->admin == 1) {
+                return response()->json(['success' => 'admin'], 200);
+            } else {
+                return response()->json(['success' => 'success'], 200);
+            }
+            } else {
+            return response()->json(['error' => 'error'], 401);
+        }
+    }
+
+    public function admin()
+    {
         
+        return view('admin');
+    }
+    public function profile()
+    {
+        
+        return view('profile');
     }
 }

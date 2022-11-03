@@ -21,3 +21,7 @@ Route::get('/sorting',[CatalogController::class, 'sorting']);
 
 Route::get('/item{id}',[CatalogController::class, 'item'])->name('item');
 Route::post('/register',[UserController::class, 'register'])->name('register');
+Route::post('/login', [UserController::class, 'login'])->name('login');
+
+Route::get('/admin', [UserController::class, 'admin'])->name('admin');
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');

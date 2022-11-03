@@ -58,27 +58,26 @@
         </div>
     </div>
 
-    <div class="modal fade" id="auth" tabindex="-1" aria-labelledby="auth" aria-hidden="true">
+    <div class="modal fade" id="auth" tabindex="-1" style="z-index: 99999;" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="auth">Авторизация</h1>
+                    <h5 class="modal-title">Авторизация</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <input type="text" id="login1" class="form-control" placeholder="Логин" required>
-                    </div>
-                    <div class="invalid-feedback" id="loginError "></div>
 
-                    <div class="input-group mb-3">
-                        <input type="password" id="pass" class="form-control" placeholder="Пароль" required>
+                <form action="{{route('login')}}" method="post" id="authForm" onsubmit="login1(this,event)">
+                    <div class="modal-body">
+                        <input type="text" name="login" id="login1Input" placeholder="Логин" class="form-control mt-2">
+                        <div class="invalid-feedback" id="login1Error"></div>
+                        <input type="password" name="password1" id="password1Input" placeholder="Пароль" class="form-control mt-2">
+                        <div class="invalid-feedback" id="password1Error"></div>
                     </div>
-                </div>
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-success">Войти</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Войти</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
