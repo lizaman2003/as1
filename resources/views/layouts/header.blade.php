@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    
+
     <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">Music House</a>
@@ -33,9 +33,18 @@
                         <a class="nav-link active" href="#">Где нас найти?</a>
                     </li>
                 </ul>
-                <a class="btn btn-success ms-2" data-bs-toggle="modal" href="#reg" role="button">Регистрация</a>
-                <a class="btn btn-outline-success ms-2" data-bs-toggle="modal" href="#auth"
-                    role="button">Войти</a>
+                @if (Auth::check())
+                    @if (Auth::user()->admin == 1)
+                        <a href="{{route('admin')}}" class="btn btn-outline-success">Панель управления</a>
+                    @else
+                        <a href="{{route('profile')}}" class="btn btn-outline-success">Личный кабинет</a>
+                    @endif
+                    <a href="{{route('logout')}}" class="btn btn-success ms-2">Выйти</a>
+                @else
+                    <a class="btn btn-success ms-2" data-bs-toggle="modal" href="#reg" role="button">Регистрация</a>
+                    <a class="btn btn-outline-success ms-2" data-bs-toggle="modal" href="#auth"
+                        role="button">Войти</a>
+                @endif
             </div>
         </div>
     </nav>

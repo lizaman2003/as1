@@ -75,7 +75,7 @@
                         <div class="invalid-feedback" id="password1Error"></div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">Войти</button>
+                        <button type="submit" class="btn btn-success">Войти</button>
                     </div>
                 </form>
             </div>
