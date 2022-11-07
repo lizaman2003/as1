@@ -43,7 +43,6 @@ function login1(form, action1) {
     action1.preventDefault();
 
     let idForm = $(form).attr("id");
-console.log(idForm);
     $.post({
         url: $(form).attr("action"),
         data: $(form).serialize(),

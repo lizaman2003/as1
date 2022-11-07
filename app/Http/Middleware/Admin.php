@@ -20,7 +20,7 @@ class Admin
         if(Auth::user()->is_admin == 1){
             return $next($request);
         }else {
-            return redirect()->route('main');
+            return redirect()->route('home');
         }
         
     }
