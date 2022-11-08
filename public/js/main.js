@@ -1,3 +1,5 @@
+const myToast = document.getElementById('notify');
+const notify = bootstrap.Toast.getOrCreateInstance(myToast);
 function sorting(category, type) {
     $.get({
         url: "/sorting",
@@ -71,29 +73,20 @@ function login1(form, action1) {
         }
     });
 }
-// function login(t, el) {
-//     el.preventDefault();
-//     let formId = $(t).attr('id');
-
-//     $.ajax({
-//         url: $(t).attr('action'),
-//         type: $(t).attr('method'),
-//         contentType: false,
-//         processData: false,
-//         data: new FormData(t),
-//         success: function (res) {
-//             console.log(res);
-//             if (res.success == 'success') {
-//                 window.location.href = '/';
-//             }
-//             console.log(res);
-//         }, error:(res)=>{
-//             $('form#' + Formid + ' div.invalid-feedback').text('');
-//             $('form#' + Formid + ' input').removeClass('is-invalid');
-//             $.each(res.responseJSON, (index, value) => {
-//                 $('form#' + Formid + ' div#' + index + 'Error').text(value);
-//                 $('form#' + Formid + ' input#' + index + 'Input').addClass('is-invalid');
-//             })
-//         }
-//     })
-// }
+function addCart(item) {
+    $.get({
+        url: '/cart/add',
+        data: { item: item },
+        success: (res) => {
+            if (res.responseJSON.cart == 'success') {
+            }  
+        },
+        error: (res) => {
+            console.log(res);
+            if(res.responseJSON.cart =='noCount'){
+                $('div#notify > div.toast-body').text('У нас нет такого колличества товаров');
+                notify.show();
+            }
+        }
+    })
+}

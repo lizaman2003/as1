@@ -33,22 +33,33 @@
                         <a class="nav-link active" href="#">Где нас найти?</a>
                     </li>
                 </ul>
-                @if (Auth::check())
-                    @if (Auth::user()->admin == 1)
-                        <a href="{{route('admin')}}" class="btn btn-outline-success">Панель управления</a>
-                    @else
-                        <a href="{{route('profile')}}" class="btn btn-outline-success">Личный кабинет</a>
-                    @endif
-                    <a href="{{route('logout')}}" class="btn btn-success ms-2">Выйти</a>
-                @else
+
+
+                @auth
+                    <a href="{{ route('cart') }}" class="btn btn-outline-success">Корзина</a>
+                    <a href="{{ route('logout') }}" class="btn btn-success ms-2">Выйти</a>
+                @endauth
+                @guest
                     <a class="btn btn-success ms-2" data-bs-toggle="modal" href="#reg" role="button">Регистрация</a>
-                    <a class="btn btn-outline-success ms-2" data-bs-toggle="modal" href="#auth"
-                        role="button">Войти</a>
-                @endif
+                    <a class="btn btn-outline-success ms-2" data-bs-toggle="modal" href="#auth" role="button">Войти</a>
+                @endguest
+
             </div>
         </div>
     </nav>
     @yield ('main')
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div class="toast" id="notify" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Music House</strong>
+                <small>сейчас</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Hello, world! This is a toast message.
+            </div>
+        </div>
+    </div>
     <footer class="container-fluid" style="background: #212529; color:white">
         <br>
         <p class="text-center"> © 2017-2024 Company, Inc Music House </p>

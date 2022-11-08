@@ -15,7 +15,9 @@
                                 <div class="btn-group">
                                     <a href="{{ route('item', ['id' => $i->id]) }}"
                                         class="btn btn-sm btn-outline-success">Подробнее</a>
-                                    <button type="button" class="btn btn-sm btn-success">В корзину</button>
+                                    @auth
+                                        <button type="button" class="btn btn-sm btn-success">В корзину</button>
+                                    @endauth
                                 </div>
                                 <small class="text-muted">{{ $i->price }} руб.</small>
                             </div>
