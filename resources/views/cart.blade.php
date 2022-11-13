@@ -43,15 +43,17 @@
                             <strong>{{ $c->name }}{{ $c->model }}</strong>
                         </div>
                         <div class="col-2 text-center">
-                            <button type="button" class="btn btn-outline-success btn-sm text-dark">-</button>
-                            <span id="count1">{{ $c->count }}</span>
-                            <button type="button" class="btn btn-outline-success btn-sm text-dark">+</button>
+                            <button type="button" class="btn btn-outline-success btn-sm text-dark"
+                                onclick="changeCount({{ $c->id }},'remove')">-</button>
+                            <span id="count{{ $c->id }}">{{ $c->count }}</span>
+                            <button type="button" class="btn btn-outline-success btn-sm text-dark"
+                                onclick="changeCount({{ $c->id }},'add')">+</button>
                         </div>
                         <div class="col-1 text-center">
                             {{ $c->price }}руб
                         </div>
                         <div class="col-2 text-center">
-                            <strong>{{ $c->count * $c->price }}руб</strong>
+                            <strong id="sum{{ $c->id }}">{{ $c->count * $c->price }}руб</strong>
                         </div>
                         <div class="col-1">
                             <a href="{{ route('deleateCart', ['id' => $c->id]) }}" class="d-inline-block btn-close"
@@ -59,6 +61,20 @@
                         </div>
                     </div>
                     <hr>
+                    <div class="row justify-content-end">
+                        <div class="col-4 text-end">
+                            <h3 class="mb-2">Обшая сумма- <span id="sumCart{{ $c->id }}"> {{ $cartInfo->sum }} </span></h3>
+                            <form action="{{ route('ordering') }}" method="Post" id="ordering"
+                                onsubmit="formAction(this,event)">
+                                <div>
+                                    <input class="form-control mb-2 "name="password" id="passwordInput" type="password"
+                                        placeholder="Введите пароль для поттверждения">
+                                    <div class="invalid-feedback" id="passwordError"></div>
+                                </div>
+                                <button type="submit" class="btn btn-success">Оформить заказ</button>
+                            </form>
+                        </div>
+                    </div>
                 @endforeach
             @else
                 <div class="row">
@@ -69,12 +85,7 @@
                 @endif
 
 
-                <div class="row">
-                    <div class="col-12 text-end">
-                        <h3>Обшая сумма- {{ $cartInfo->sum }}</h3>
-                        <a href="#" class="btn btn-success">Оформить заказ</a>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>

@@ -18,7 +18,7 @@
                 <p><strong>Модель:</strong> {{$item->model}}</p>
                 <h3 class="mt-4">{{$item->price}}руб</h5>
                 @auth
-                <a http="{{route('addCart')}}" class="btn btn-sm btn-success" onchange="addCart({{$item->id}})">В корзину</a>
+                <button type="button" class="btn btn-sm btn-success" onclick="addCart({{$item->id}})">В корзину</button>
                 @endauth
             </div>
         </div>

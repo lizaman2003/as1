@@ -61,11 +61,7 @@ class UserController extends Controller
         }
     }
 
-    public function admin()
-    {
-        
-        return view('admin');
-    }
+    
     public function profile()
     {
         

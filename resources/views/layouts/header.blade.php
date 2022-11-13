@@ -36,8 +36,14 @@
 
 
                 @auth
-                    <a href="{{ route('cart') }}" class="btn btn-outline-success">Корзина</a>
+                    @if (Auth::user()->admin == 1)
+                    <a href="{{ route('admin') }}" class="btn btn-outline-success ms-2">Админ панель</a>
                     <a href="{{ route('logout') }}" class="btn btn-success ms-2">Выйти</a>
+                    @else
+                        <a href="{{ route('cart') }}" class="btn btn-outline-success">Корзина</a>
+                        <a href="{{ route('myOrders') }}" class="btn btn-outline-success">Мои заказы</a>
+                        <a href="{{ route('logout') }}" class="btn btn-success ms-2">Выйти</a>
+                    @endif
                 @endauth
                 @guest
                     <a class="btn btn-success ms-2" data-bs-toggle="modal" href="#reg" role="button">Регистрация</a>
